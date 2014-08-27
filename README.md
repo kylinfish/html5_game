@@ -1,11 +1,11 @@
-html5_game
+HTML5 Game
 ==========
 
 
 Introduction:
 ------------
 
-Here are some games created by Win.
+Here are some html5 games with Box2dJS framework.
 
 
 * Ping Pong  | [Demo](https://rawgit.com/kylinfish/html5_game/master/html5_game/pingpong.html)
@@ -23,6 +23,9 @@ Requirements
 ------------
 * jQuery 1.x 
 
-* Box2dJS
+* Box2dJS [http://box2d-js.sourceforge.net/](http://box2d-js.sourceforge.net/)
 
 
+License
+------------
+Copyright (c) 2012 win 
