@@ -1,10 +1,11 @@
+var gameStart=false;
 var tankGame={
 	currentLevel:0,
 	score:0,
 	AttackState:false, //NPC是否自動攻擊
 	canvasWidth:0,
 	canvasHeight:0,
-	stepCount:0, 				 //step 計數變數
+	stepCount:0, 			//step 計數變數
 	attackFrenquence:500,   //攻擊頻率速度
 	shooter_blood:100,
 	esc_key_count:0,
@@ -137,69 +138,69 @@ tankGame.levels[3] = [
 {"type":"treasurer","x":30, "y":165,"item":"money"},{"type":"treasurer","x":60, "y":165 ,"item":"money"}
 ];
 $(document).keydown(function(e){
-		switch(e.keyCode){
-			case 38:   //UP
-							//var force_up = new b2Vec2(tankGame.shooter.GetCenterPosition().x,tankGame.shooter.GetCenterPosition().y-10 );
-							var force_up = new b2Vec2(0,-150 );
-							tankGame.shooter.SetLinearVelocity(force_up);
-							keyState.up=true;
-							keyState.down=false;
-							keyState.left=false;
-							keyState.right=false;
-							break;
-			case 40:   //DOWN
-							var force_down  = new b2Vec2(0,150 );
-							tankGame.shooter.SetLinearVelocity(force_down);
-							keyState.up=false;
-							keyState.down=true;
-							keyState.left=false;
-							keyState.right=false;
-							break;
-			case 37:   //LEFT
-							var force_left = new b2Vec2(-150,0 );
-							tankGame.shooter.SetLinearVelocity(force_left);
-							
-							keyState.up=false;
-							keyState.down=false;
-							keyState.left=true;
-							keyState.right=false;
-							break;
-			case 39:  //RIGHT
-							var force_right =  new b2Vec2(150,0 );
-							tankGame.shooter.SetLinearVelocity(force_right);
-							keyState.up=false;
-							keyState.down=false;
-							keyState.left=false;
-							keyState.right=true;
-							break;
-			case 32:
-							DirectionDetect();
-							break;
-			case 82: //R
-						restart();
-						
-						break;
-			case 90://Z
-						clearArray();
-						initialGame(++tankGame.currentLevel);
-						break;
-			case 27://ESC
-						//補上時間暫停，畫面
-						tankGame.esc_key_count++;
-						if(tankGame.esc_key_count%2==1){
-							$("#aga_or_con").html("Continue");
-							$("#endInfo").click();
-							gamePause();
-							
-						}
-						else{
-						$("#fancybox-close").click();
-							gamePlay();
-							
-						}
-						
-						break;
-		}
+	switch(e.keyCode){
+		case 38:   //UP
+			//var force_up = new b2Vec2(tankGame.shooter.GetCenterPosition().x,tankGame.shooter.GetCenterPosition().y-10 );
+			var force_up = new b2Vec2(0,-150 );
+			tankGame.shooter.SetLinearVelocity(force_up);
+			keyState.up=true;
+			keyState.down=false;
+			keyState.left=false;
+			keyState.right=false;
+			break;
+		case 40:   //DOWN
+			var force_down  = new b2Vec2(0,150 );
+			tankGame.shooter.SetLinearVelocity(force_down);
+			keyState.up=false;
+			keyState.down=true;
+			keyState.left=false;
+			keyState.right=false;
+			break;
+		case 37:   //LEFT
+			var force_left = new b2Vec2(-150,0 );
+			tankGame.shooter.SetLinearVelocity(force_left);
+			
+			keyState.up=false;
+			keyState.down=false;
+			keyState.left=true;
+			keyState.right=false;
+			break;
+		case 39:  //RIGHT
+			var force_right =  new b2Vec2(150,0 );
+			tankGame.shooter.SetLinearVelocity(force_right);
+			keyState.up=false;
+			keyState.down=false;
+			keyState.left=false;
+			keyState.right=true;
+			break;
+		case 32:
+			DirectionDetect();
+			break;
+		case 82: //R
+			restart();
+			
+			break;
+		case 90://Z
+			clearArray();
+			initialGame(++tankGame.currentLevel);
+			break;
+		case 27://ESC
+			//補上時間暫停，畫面
+			tankGame.esc_key_count++;
+			if(tankGame.esc_key_count%2==1){
+				$("#aga_or_con").html("Continue");
+				$("#endInfo").click();
+				gamePause();
+				
+			}
+			else{
+			$("#fancybox-close").click();
+				gamePlay();
+				
+			}
+			
+			break;
+	}
 });
 $(function() {
 //---------media------------------
@@ -215,14 +216,17 @@ $(function() {
 	tankGame.world = createWorld();
 	$("#game").css({'background-image' : 'url(assets/img/marioadv/maps/starting_screen.jpg)'} );
 	$("#game").click(function(e){
-		if (tankGame.currentLevel==0){
-			$("#game_state").removeClass("hide");
-			$("#game_state").addClass("show");
-			tankGame.score=0;
-			tankGame.audio_gamestart.pause();
-			initialGame(tankGame.currentLevel);
-			tankGame.timer=setInterval(timerShow,1000); //顯示時間
-			step();
+		if (gameStart != false){
+			if (tankGame.currentLevel==0){
+				$("#game_state").removeClass("hide");
+				$("#game_state").addClass("show");
+				tankGame.score=0;
+				tankGame.audio_gamestart.pause();
+				initialGame(tankGame.currentLevel);
+				tankGame.timer=setInterval(timerShow,1000); //顯示時間
+				step();
+			}
+			gameStart=true;
 		}
 	});
 	canvas= document.getElementById('game');
@@ -504,6 +508,7 @@ function collision(){
 		//---------玩家過關-----------------
 		if((body1==tankGame.shooter&& body2==tankGame.home )||(body2==tankGame.shooter&& body1==tankGame.home )) {
 			console.log("LevelPass"); 
+			gameStart=false;
 			tankGame.melody_pass = document.getElementById("levelpass");
 			tankGame.melody_pass.play();
 			
