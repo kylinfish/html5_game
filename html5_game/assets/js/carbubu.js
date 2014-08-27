@@ -1,3 +1,4 @@
+var gameStart= false;
 var carGame={
 	currentLevel:0
 }
@@ -95,17 +96,22 @@ $(document).keydown(function(e){
 	});
 
 $(function() {
-	initialGame(carGame.currentLevel);
-	//console.log("the world is created." , carGame.world);
-	canvas= document.getElementById('game');
-	ctx=canvas.getContext("2d");
-	canvasWidth=parseInt(canvas.width);
-	canvasHeight=parseInt(canvas.height);
-	drawWorld(carGame.world,ctx);
-	step();
+	$("#game").css("backgroundImage","url(assets/img/carbubu/starting_screen.jpg)"); 
+	$("#game").click(function(e){
+		if (gameStart == false){
+			initialGame(carGame.currentLevel);
+			canvas= document.getElementById('game');
+			ctx=canvas.getContext("2d");
+			canvasWidth=parseInt(canvas.width);
+			canvasHeight=parseInt(canvas.height);
+			drawWorld(carGame.world,ctx);
+			step();
+			gameStart=true;
+		}
+	});
+	
 });
 function initialGame(level){
-console.log(level+"   "+carGame.levels.length);
 	if(level==carGame.levels.length)
 		return 0;
 	var bg =level+1;

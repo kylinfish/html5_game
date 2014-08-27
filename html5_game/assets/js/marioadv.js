@@ -216,7 +216,7 @@ $(function() {
 	tankGame.world = createWorld();
 	$("#game").css({'background-image' : 'url(assets/img/marioadv/maps/starting_screen.jpg)'} );
 	$("#game").click(function(e){
-		if (gameStart != false){
+		if (gameStart == false){
 			if (tankGame.currentLevel==0){
 				$("#game_state").removeClass("hide");
 				$("#game_state").addClass("show");
@@ -225,8 +225,9 @@ $(function() {
 				initialGame(tankGame.currentLevel);
 				tankGame.timer=setInterval(timerShow,1000); //顯示時間
 				step();
+				gameStart=true;
 			}
-			gameStart=true;
+			
 		}
 	});
 	canvas= document.getElementById('game');
