@@ -1,0 +1,60 @@
+<!DOCTYPE html >
+<html lang="zh">
+<head>
+	<meta charset=utf-8 />
+	<link href="assets/css/marioadv.css" rel="stylesheet" type="text/css" />
+	<link href='http://fonts.googleapis.com/css?family=Freckle+Face' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="assets/js/fancybox/jquery.fancybox-1.3.1.css" media="screen" />
+</head>
+<body>
+		<header id="head">Mario's Adventure</header>
+		<section id="page">
+			<canvas id="game"  width="800px" height="530px">
+				Sorry,your web browsser doesn't support Canvas content.
+			</canvas>
+			<span id ="game_state"  class="hide">
+				GameScroe:&nbsp; <font id ="score" class="fontstate">0 </font>&nbsp;&nbsp;&nbsp;&nbsp;
+				Time: &nbsp;<font id ="timer" class="fontstate" >0 </font>&nbsp;&nbsp;&nbsp;&nbsp;
+				HP: &nbsp;<meter id="blood" value="100" min="0" max="100" low="30" high="90" optimum="100" >A+</meter>
+			</span>
+			<div id ="asset">	
+					<img id="tank" src='assets/img/marioadv/tank.png'>
+					<img id="bullet1" src='assets/img/marioadv/bullet1.png'>
+					<img id="bullet2" src='assets/img/marioadv/bullet2.png'>
+					<img id="home" src='assets/img/marioadv/home.png'>
+					<img id="mushroom" src='assets/img/marioadv/mushroom.png'>
+					<img id="money" src='assets/img/marioadv/money.png'>
+					<img id="mon1" src='assets/img/marioadv/mon-1.png'>
+					<img id="mon2" src='assets/img/marioadv/mon-2.png'>
+					<img id="mon3" src='assets/img/marioadv/mon-3.png'>
+					<img id="mon4" src='assets/img/marioadv/mon-4.png'>
+					<audio loop  id="melody" src="assets/media/marioadv/bg.mp3" />
+					<audio   id="levelpass" src="assets/media/marioadv/levelpass.mp3" />
+					<audio   id="dollar" src="assets/media/marioadv/dollar.mp3" />
+					<audio   id="dead" src="assets/media/marioadv/dead.mp3" />
+					<audio   id="npcdead" src="assets/media/marioadv/npcdead.mp3" />
+					<audio   id="hitme" src="assets/media/marioadv/hitme.mp3" />
+					<audio   id="gamend" src="assets/media/marioadv/gamend.mp3" />
+					<audio loop id="gamestart" src="assets/media/marioadv/gamestart.mp3" />
+					<!--------facnyBox------------>
+					<a id="endInfo" href="#inline1" >Inline</a>
+					<div id="inline1"  style="width:400px;height:160px;overflow:auto;" onclick="">
+						<font class="fontstate">Do you want to play again?<BR>
+						</font>
+						<font id="scoreShow" class="fontstate">Get Score:</font><BR>
+						<button type="button" class="button" id="aga_or_con" onclick="restart()">continue</button>
+						<button type="submit" class="button"  onclick="window.open('http://fb.me/kuaswin');">Thanks</button>
+					</div>
+					<!--------facnyBox- END----------->
+			</div>
+		</section>
+		<footer id ="footer">Copyright © 2012 KUASCSIE- Win  | All Rights Reserved  | <a href="img/ppt/introduction.html" >here</a> 
+		</footer>
+		<script src="https://code.jquery.com/jquery-1.11.1.js" ></script>	
+		<script src="assets/js/box2djs.min.js" ></script>	
+		<script src="assets/js/marioadv.js" ></script>	
+		<script type="text/javascript" src="assets/js/fancybox/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="assets/js/fancybox/jquery.mousewheel-3.0.2.pack.js"></script>
+		<script type="text/javascript" src="assets/js/fancybox/jquery.fancybox-1.3.1.js"></script>
+</body>
+</html>

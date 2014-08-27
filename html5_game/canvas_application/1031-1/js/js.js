@@ -1,0 +1,46 @@
+$(function(){
+	var canvas =document.getElementById("game");
+	var ctx=canvas.getContext("2d");
+	
+	/*黃色上半圓*/
+	ctx.fillStyle="rgba(195,230,56,1)";//a=alpha
+	ctx.beginPath();
+	ctx.arc(50,50,25,Math.PI*2/3,0,false);
+	ctx.closePath();
+	ctx.fill();
+	/*黃色下半圓*/
+	ctx.fillStyle="rgba(195,230,56,1)";//a=alpha
+	ctx.beginPath();
+	ctx.arc(52,53,25,Math.PI*2/3,0,true);
+	ctx.closePath();
+	ctx.fill();
+	/*灰色上半圓*/
+	ctx.fillStyle="rgba(100,100,100,1)";//a=alpha
+	ctx.beginPath();
+	ctx.arc(140,50,25,0,Math.PI,true);
+	ctx.closePath();
+	ctx.fill();
+	/*灰色下半圓*/
+	ctx.fillStyle="rgba(100,100,100,1)";//a=alpha
+	ctx.beginPath();
+	ctx.arc(140,55,25,0,Math.PI,false);//起始座標(x,y),半徑,起始角度，結束角度，順/逆時
+	ctx.closePath();
+	ctx.fill();
+	/*橘色左半圓*/
+	ctx.fillStyle="rgba(200,123,15,1)";//a=alpha
+	ctx.beginPath();
+	ctx.arc(230,50,25,Math.PI*3/2,Math.PI/2,true);
+	ctx.closePath();
+	ctx.fill();
+	/*橘色右半圓*/
+	ctx.fillStyle="rgba(200,123,15,1)";//a=alpha
+	ctx.beginPath();
+	ctx.arc(235,50,25,Math.PI*3/2,Math.PI/2,false);
+	ctx.closePath();
+	ctx.fill();
+	/*直線*/
+	ctx.beginPath();   
+	ctx.moveTo(50,100);   
+	ctx.lineTo(50,50);   
+	ctx.stroke(); 
+});

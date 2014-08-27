@@ -1,0 +1,153 @@
+<!DOCTYPE html >
+<html lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<title>製作過程與心得</title>
+<style type="text/css">
+	ul, li {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+	#abgne-block-20110317 {
+		width: 1280px;	/* 圖片的寬 */
+		height: 750px;	/* 圖片的高 + 30 */
+		border: 10px solid #ddd;
+	}
+	.abgne-player {
+		width: 1280px;	/* 圖片的寬 */
+		height: 720px;	/* 圖片的高 */
+		position: relative;
+		overflow: hidden;
+	}
+	.abgne-player ul.abgne-list {
+		position: absolute;
+		width: 9999px;
+		height: 100%;
+	}
+	.abgne-player ul.abgne-list li {
+		float: left;
+		width: 1280px;	/* 圖片的寬 */
+		height: 100%;
+	}
+	.abgne-player ul.abgne-list img{
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+	.abgne-control {
+		height: 24px;
+		padding: 3px;
+		color: #fff;
+		font-size: 13px;
+		background: #333;
+	}
+	.abgne-control ul {
+		float: left;
+	}
+	.abgne-control ul li {
+		float: left;
+		padding: 0 5px;
+		line-height: 20px;
+		margin: 2px;
+		background: #666;
+		cursor: pointer;
+	}
+	.abgne-control ul.numbers {
+		margin-left: 13px;
+	}
+	.abgne-control ul li.current {
+		background: #fff;
+		color:#000;
+	}
+	.abgne-control ul li.hover {
+		background: #fff;
+		color:#000;
+	}
+</style>
+<script type="text/javascript">
+	$(function(){
+		// 先取得必要的元素並用 jQuery 包裝
+		// 再來取得 $block 的高度及設定動畫時間
+		var $block = $('#abgne-block-20110317'),
+			$slides = $block.find('ul.abgne-list'),
+			_width = $block.width(),
+			$li = $slides.find('li'),
+			$control = $block.find('.abgne-control'),
+			_animateSpeed = 600;
+		
+		// 設定 $slides 的寬(為了不讓 li 往下擠)
+		$slides.css('width', ($li.length + 1) * _width);
+		// 產生 li 選項
+		var _str = '';
+		for(var i=0, j=$li.length;i<j;i++){
+			// 每一個 li 都有自己的 className = playerControl_號碼
+			_str += '<li class="abgne-player-control_' + (i+1) + '">' + (i+1) + '</li>';
+		}
+
+		// 產生 ul 並把 li 選項加到其中
+		var $number = $('<ul class="numbers"></ul>').html(_str).appendTo($control), 
+			$numberLi = $number.find('li');
+
+		// 並幫 .numbers li 加上 click 事件
+		$numberLi.click(function(){
+			var $this = $(this);
+			$this.addClass('current').siblings('.current').removeClass('current');
+			// 移動位置到相對應的號碼
+			$slides.stop().animate({
+				left: _width * $this.index() * -1
+			}, _animateSpeed);
+			
+			return false;
+		}).eq(0).click();
+		
+		// 幫 .arrows li 加上 click 事件
+		$control.find('ul.arrows li').click(function(){
+			var _index = $numberLi.filter('.current').index();
+			$numberLi.eq((this.className.indexOf('next')>-1?_index+1:_index-1+$numberLi.length)%$numberLi.length).click();
+
+			return false;
+		});
+		
+		// 當滑鼠移到 $control li 上時, 加上 .hover 效果
+		// 反之則移除
+		$control.find('li').hover(function(){
+			$(this).addClass('hover');
+		}, function(){
+			$(this).removeClass('hover');
+		});
+	});
+</script>
+</head>
+
+<body><center>
+	<div id="abgne-block-20110317">
+		<div class="abgne-player">
+			<ul class="abgne-list">
+				<li><a href="#"><img src="1.jpg" /></a></li>
+			<li><a href="#"><img src="2.jpg" /></a></li>
+			<li><a href="#"><img src="3.jpg" /></a></li>
+			<li><a href="#"><img src="4.jpg" /></a></li>
+			<li><a href="#"><img src="5.jpg" /></a></li>
+			<li><a href="#"><img src="6.jpg" /></a></li>
+			<li><a href="#"><img src="7.jpg" /></a></li>
+			<li><a href="#"><img src="8.jpg" /></a></li>
+			<li><a href="#"><img src="9.jpg" /></a></li>
+			<li><a href="#"><img src="10.jpg" /></a></li>
+			<li><a href="#"><img src="11.jpg" /></a></li>
+			<li><a href="#"><img src="12.jpg" /></a></li>
+			</ul>
+		</div>
+		<div class="abgne-control">
+			<ul class="arrows"> 
+				<li class="prev">&lt;</li> 
+				<li class="next">&gt;</li> 
+			</ul>
+		</div>
+	</div>
+</center>
+	</body>
+</html>

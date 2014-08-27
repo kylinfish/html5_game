@@ -1,0 +1,28 @@
+html,body{
+	text-align:center;
+	background: url(../img/galaxywar/bg.jpg);
+	font-family:'Freckle Face', cursive;
+}
+#head{
+	color:#CA8EC2;
+	font-size:35px;
+}
+#footer{
+	color:#EA7500;
+	font-size:20px;
+}
+#grade{
+	color:#F9F900;
+	font-size:25px;
+}
+#game{
+	background:black;
+	position:absoult;
+	top:400;
+	background-color:#141414;
+	
+}
+#asset{
+	position:absolute;
+	top:-999999pt;
+}

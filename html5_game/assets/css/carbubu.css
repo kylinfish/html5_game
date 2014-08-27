@@ -1,0 +1,18 @@
+html,body{
+	text-align:center;
+	background: url(../img/carbubu/website_background.jpg);
+}
+#game{
+	/*background:black;*/
+	position:absoult;
+	top:400;
+	background-color:#eee;
+	
+}
+#SD{
+color: #aba000;
+}
+#asset{
+	position:absolute;
+	top:-999999pt;
+}

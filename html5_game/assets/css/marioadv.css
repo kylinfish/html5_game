@@ -1,0 +1,89 @@
+html,body{
+	text-align:center;
+	/*background: url(../img/bg.jpg);*/
+	font-family:'Freckle Face', cursive;
+	background-color:black;
+}
+#game{
+	position: relative; 
+	background-repeat:no-repeat;
+	background-color:#E3CEF6;
+}
+#game_state{
+   position: absolute; 
+	left:400px;
+	top:550px;
+   width:800px;
+	height:30px;
+}
+#blood{
+	width:150px;
+}
+#head{
+	color:#CA8EC2;
+	font-size:35px;
+}
+#footer{
+	color:#EA7500;
+	font-size:20px;
+}
+#grade{
+	color:#F9F900;
+	font-size:25px;
+}
+.fontstate{
+font-size:20px;
+color:red;
+}
+#asset{
+	position:absolute;
+	top:-999999pt;
+}
+.hit-NPC{
+	background: url(../img/hit.png);
+	position: absolute;
+	width: 50px;
+	height: 50px;
+}
+
+.show{
+	opacity: 1;
+}
+
+.hide{
+	opacity: 0;
+	-webkit-transition: opacity .2s linear;
+	transition: opacity .2s linear;
+}
+
+
+
+.button {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e681e6), color-stop(1, #f0edf0) );
+	background:-moz-linear-gradient( center top, #e681e6 5%, #f0edf0 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e681e6', endColorstr='#f0edf0');
+	background-color:#e681e6;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #e3d3e3;
+	display:inline-block;
+	color:#1a36ed;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}.button:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f0edf0), color-stop(1, #e681e6) );
+	background:-moz-linear-gradient( center top, #f0edf0 5%, #e681e6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0edf0', endColorstr='#e681e6');
+	background-color:#f0edf0;
+}.button:active {
+	position:relative;
+	top:1px;
+}
