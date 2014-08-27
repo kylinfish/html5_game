@@ -1,3 +1,4 @@
+
 var carGame={
 	State_Start_Screen:1,
 	State_Playing:2,
@@ -19,27 +20,26 @@ var bug=[];
 var bug_count;
 var destoryall =false;
 $(document).keydown(function(e){
-		switch(e.keyCode){
-			case 39:  //往右
-							var force_right =  new b2Vec2(200,0 );
-							carGame.shooter.SetLinearVelocity(force_right);
-						
-							//ApplyForce :持續出力  ApplyImpluse:瞬間出力
-							break;
-			case 37:   //往左
-							var force_left = new b2Vec2(-200,0 );
-							carGame.shooter.SetLinearVelocity(force_left);
-							break;
-			case 32:
-							carGame.bomb=drawBullet(carGame.shooter.m_position.x,carGame.shooter.m_position.y-50,"bullet");	
-							bomb.push(carGame.bomb);
-							var force= new b2Vec2(0,-500);
-							carGame.bomb.ApplyImpulse(force,carGame.bomb.GetCenterPosition());
-							carGame.audio_attack.play();
-							//moveShift();
-							break;
-		}
-	});
+	switch(e.keyCode){
+		case 39:  //往右
+			var force_right =  new b2Vec2(200,0 );
+			carGame.shooter.SetLinearVelocity(force_right);
+			//ApplyForce :持續出力  ApplyImpluse:瞬間出力
+			break;
+		case 37:   //往左
+			var force_left = new b2Vec2(-200,0 );
+			carGame.shooter.SetLinearVelocity(force_left);
+			break;
+		case 32:
+			carGame.bomb=drawBullet(carGame.shooter.m_position.x,carGame.shooter.m_position.y-50,"bullet");	
+			bomb.push(carGame.bomb);
+			var force= new b2Vec2(0,-500);
+			carGame.bomb.ApplyImpulse(force,carGame.bomb.GetCenterPosition());
+			carGame.audio_attack.play();
+			//moveShift();
+			break;
+	}
+});
 
 $(function() {
 	carGame.audio_hitshot= document.getElementById("hitshot");
@@ -49,10 +49,12 @@ $(function() {
 	$("#game").css({'background-image' : 'url(assets/img/galaxywar/starting_screen.jpg)'} );
 	carGame.state = carGame.State_Start_Screen;
 	$("#game").click(function(e){
-		carGame.melody.play();
-		initialGame(2);
-		step();
-		carGame.state=carGame.State_Playing;
+		if (carGame.state!= carGame.State_Playing){
+			carGame.melody.play();
+			initialGame(2);
+			step();
+			carGame.state=carGame.State_Playing;
+		}
 	});
 	//console.log("the world is created." , carGame.world);
 	canvas= document.getElementById('game');
@@ -147,6 +149,7 @@ function collision(){
 					carGame.audio_END = document.getElementById("gameend");
 					carGame.audio_END.play();
 					destoryall=true;
+					carGame.state=State_Game_Over_Screen;
 					$("#game").css({'background-image' : 'url(assets/img/galaxywar/gameover.jpg)'} );
 					ctx.clearRect(0,0,canvasWidth,canvasHeight);
 					//clear-------------------------
@@ -231,22 +234,22 @@ function createbug(x,y){
 	return bug;
 }
 function createShooter(x, y) {
-            // the car box definition
-            var boxSd = new b2BoxDef();
-			boxSd.userData=document.getElementById("shooter");
-            boxSd.density = 1.0;  //有密度就有重量，有引力
-            boxSd.friction = 0.2;
-            boxSd.restitution = 0.05;
-            boxSd.extents.Set(20,20);
-			
-            // the car body definition
-            var boxBd = new b2BodyDef();
-            boxBd.AddShape(boxSd);
-            boxBd.position.Set(x,y);
+    // the car box definition
+    var boxSd = new b2BoxDef();
+	boxSd.userData=document.getElementById("shooter");
+    boxSd.density = 1.0;  //有密度就有重量，有引力
+    boxSd.friction = 0.2;
+    boxSd.restitution = 0.05;
+    boxSd.extents.Set(20,20);
 	
-		    var carBody = carGame.world.CreateBody(boxBd);
-			
-            return carBody;
+    // the car body definition
+    var boxBd = new b2BodyDef();
+    boxBd.AddShape(boxSd);
+    boxBd.position.Set(x,y);
+
+    var carBody = carGame.world.CreateBody(boxBd);
+	
+    return carBody;
 }
 
 function drawWorld(world, context) {
