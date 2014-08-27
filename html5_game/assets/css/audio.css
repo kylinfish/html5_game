@@ -58,8 +58,8 @@ a[href='#game'] span {
 }
 #game-scene.show-scene{
 	top:0;
-	-webkit -transition:top 5s linear;
-	transition: top 5s linear;
+	-webkit -transition:top 1s linear;
+	transition: top 1s linear;
 }
 
 #game-scene{
